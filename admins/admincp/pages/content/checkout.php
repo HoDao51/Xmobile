@@ -70,7 +70,6 @@
                 <th>Ngày đặt</th>
                 <th>Trạng thái</th>
                 <th>Xem chi tiết</th>
-                <th>Xóa</th>
             </tr>
         </thead>
         <tbody>
@@ -95,9 +94,6 @@
                     </td>
                     <td>
                         <a href="index.php?action=chitietdonhang&id=<?php echo $order['OrderId']; ?>">Chi tiết</a>
-                    </td>
-                    <td>
-                        <a href="check_out/delete_order.php?id=<?php echo $order['OrderId']; ?>">Xóa</a>
                     </td>
                 </tr>
             <?php } ?>

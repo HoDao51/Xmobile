@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style_login.css">
 </head>
-<body>
+<body style="background-image: url('images/genshin-impact-furina-art-hd-wallpaper-uhdpaper.jpg'); background-size: cover; background-position: center;">
     <?php
         session_start();
         if(isset($_SESSION['customer_email'])){
@@ -26,7 +26,7 @@
             echo "<script>alert('Sai thông tin đăng nhập!');</script>";   
         }
     ?>
-    <div class="container">
+    <div class="container" style="opacity: 96.6%;">
         <h2>Đăng Nhập</h2>
         <form method="post" action="login_process.php">
             <div class="input-group">

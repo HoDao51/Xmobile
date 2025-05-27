@@ -2,7 +2,7 @@
             h2 {
             text-align: center;
             font-size: 35px;
-            color: #333333; /* Màu chữ tiêu đề */
+            color: #333333;
         }
 
         .container {
@@ -12,8 +12,8 @@
         }
 
         .button {
-            background-color: #ffc107; /* Màu vàng cho nút */
-            color: #121212; /* Màu chữ đen cho nút */
+            background-color: #ffc107; 
+            color: #121212; 
             padding: 10px 20px;
             border: none;
             font-size: 16px;
@@ -45,98 +45,89 @@
             padding: 12px;
             text-align: center;
             font-size: 16px;
-            border: 1px solid #ccc; /* Đường viền màu xám nhạt */
+            border: 1px solid #ccc;
         }
 
         th {
-            background-color: #1d1919; /* Nền đen cho header */
-            color: #ffc107; /* Màu vàng cho chữ trong header */
+            background-color: #1d1919;
+            color: #ffc107;
             font-weight: bold;
         }
 
         td {
-            background-color: #f9f9f9; /* Nền sáng cho các ô dữ liệu */
+            background-color: #f9f9f9;
             color: #000;
-        }
-        td a.delete {
-            background-color: #dc3545; /* Màu đỏ cho nút xóa */
-            padding: 10px 20px;
-            border-radius: 5px;
-            color: white; /* Chữ trắng khi xóa */
-        }
-
-        td a.delete:hover {
-            background-color: #c82333; /* Màu đỏ đậm khi hover */
         }
 
 </style>
 <?php
-include_once "../../Connection/open.php";
-// Lấy ID sản phẩm từ URL
-$id = $_GET['id'];
+    // mở kết nối
+    include_once "../../Connection/open.php";
+    // Lấy ID sản phẩm từ URL
+    $id = $_GET['id'];
 
-//lấy tên khách hàng dựa vào id
-$sqlCustomers = "SELECT *FROM customers
-                INNER JOIN carts ON customers.Id = carts.Customer_id
-                WHERE carts.Id = $id";
-//chay query
-$customers = mysqli_query($connection, $sqlCustomers);
+    //lấy tên khách hàng dựa vào id
+    $sqlCustomers = "SELECT *FROM customers
+                    INNER JOIN carts ON customers.Id = carts.Customer_id
+                    WHERE carts.Id = $id";
+    //chay query
+    $customers = mysqli_query($connection, $sqlCustomers);
 
-//Lấy giá trị đang search
-            if(isset($_GET["keyword"])){
-                $keyword = $_GET["keyword"];
-            } else {
-                $keyword = "";
-            }
+    //Lấy giá trị đang search
+                if(isset($_GET["keyword"])){
+                    $keyword = $_GET["keyword"];
+                } else {
+                    $keyword = "";
+                }
 
-// Cấu hình phân trang
-$recordsPerPage = 2;
+    // Cấu hình phân trang
+    $recordsPerPage = 2;
 
-// Đếm tổng số sản phẩm phù hợp
-$sqlCount = "SELECT COUNT(*) AS total 
-             FROM carts
-             INNER JOIN cart_details ON carts.Id = cart_details.Cart_id
-             INNER JOIN products ON products.Id = cart_details.Product_id
-             WHERE products.Name LIKE '%$keyword%' AND carts.Id = $id";
-$resultCount = mysqli_query($connection, $sqlCount);
-//Lấy tổng số bản ghi
-            foreach ($resultCount as $countRecord) {
-                $totalRecords = $countRecord["total"];
-            }
-$pages = ceil($totalRecords / $recordsPerPage);
+    // Đếm tổng số sản phẩm phù hợp
+    $sqlCount = "SELECT COUNT(*) AS total 
+                FROM carts
+                INNER JOIN cart_details ON carts.Id = cart_details.Cart_id
+                INNER JOIN products ON products.Id = cart_details.Product_id
+                WHERE products.Name LIKE '%$keyword%' AND carts.Id = $id";
+    $resultCount = mysqli_query($connection, $sqlCount);
+    //Lấy tổng số bản ghi
+                foreach ($resultCount as $countRecord) {
+                    $totalRecords = $countRecord["total"];
+                }
+    $pages = ceil($totalRecords / $recordsPerPage);
 
-// đếm trang
-$pages = ceil($totalRecords / $recordsPerPage);
-// Lấy trang hiện tại
-    if(isset($_GET["page"])){
-                $page = $_GET["page"];
-            } else {
-                $page = 1;
-            }
-// Vị trí bắt đầu của từng trang
-$start = ($page - 1) * $recordsPerPage;
+    // đếm trang
+    $pages = ceil($totalRecords / $recordsPerPage);
+    // Lấy trang hiện tại
+        if(isset($_GET["page"])){
+                    $page = $_GET["page"];
+                } else {
+                    $page = 1;
+                }
+    // Vị trí bắt đầu của từng trang
+    $start = ($page - 1) * $recordsPerPage;
 
 
-// Lấy dữ liệu giỏ hàng
-$sql = "SELECT 
-            carts.Customer_id,
-            cart_details.Product_id, 
-            cart_details.Quantity, 
-            carts.Id AS Cart_id,
-            products.Name AS ProductName, 
-            images.Name AS ImageName, 
-            products.Price 
-        FROM carts
-        INNER JOIN cart_details ON carts.Id = cart_details.Cart_id
-        INNER JOIN products ON products.Id = cart_details.Product_id
-        LEFT JOIN images ON products.Id = images.Product_id
-        WHERE products.Name LIKE '%$keyword%' AND carts.Id = $id
-        ORDER BY carts.Customer_id ASC, products.Id DESC
-        LIMIT $start, $recordsPerPage";
-
-$carts = mysqli_query($connection, $sql);
-
-include_once "../../Connection/close.php";
+    // Lấy dữ liệu giỏ hàng
+    $sql = "SELECT 
+                carts.Customer_id,
+                cart_details.Product_id, 
+                cart_details.Quantity, 
+                carts.Id AS Cart_id,
+                products.Name AS ProductName, 
+                images.Name AS ImageName, 
+                products.Price 
+            FROM carts
+            INNER JOIN cart_details ON carts.Id = cart_details.Cart_id
+            INNER JOIN products ON products.Id = cart_details.Product_id
+            LEFT JOIN images ON products.Id = images.Product_id
+            WHERE products.Name LIKE '%$keyword%' AND carts.Id = $id
+            ORDER BY carts.Customer_id ASC, products.Id DESC
+            LIMIT $start, $recordsPerPage";
+    // chạy sql
+    $carts = mysqli_query($connection, $sql);
+    // Đóng kết nối
+    include_once "../../Connection/close.php";
 ?>
 
 <body>
@@ -193,7 +184,6 @@ include_once "../../Connection/close.php";
             <tr>
                 <td colspan="5">
                     <a href="index.php?action=quanlygiohang"><button type="button" class="back">Thoát</button></a>
-                    <button type="submit" class="button" style="width:300px">Cập nhật giỏ hàng</button>
                 </td>
             </tr>
         </table>
