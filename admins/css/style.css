@@ -6,7 +6,9 @@
 }
 
 body {
-  background-color: #979494;
+  background-image: url('../images/130-hinh-nen-may-tinh-4k-103-1.jpg'); 
+  background-size: cover; 
+  background-position: center;
   height: 100vh;
   display: flex;
   align-items: center;

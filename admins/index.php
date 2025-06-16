@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Đăng nhập</title>
     <link rel="shortcut icon" type="image/png" href="images/user-tie-solid.svg">
-    <link rel="stylesheet" href="css/style_login.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <?php

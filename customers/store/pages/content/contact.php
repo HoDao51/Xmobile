@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </li>
             <li><span class="text-gray-400">›</span></li>
             <li>
-                <a href="index.php?action=dienthoai" class="text-blue-700 hover:underline font-medium">Tin Tức Công Nghệ</a>
+                <a href="index.php?action=lienhe" class="text-blue-700 hover:underline font-medium">Liên Hệ</a>
             </li>
         </ol>
     </nav>

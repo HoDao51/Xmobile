@@ -88,7 +88,7 @@
     </table>
 
     <!-- Phân trang -->
-    <div style=" text-align: center;">
+    <div style="text-align: center; margin-top: 20px;">
         <?php for ($i = 1; $i <= $pages; $i++) {
             $link = "index.php?action=quanlysanpham&page=$i";
             if (!empty($keyword)) {

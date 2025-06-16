@@ -41,7 +41,7 @@ include_once "../../connection/close.php";
             </li>
             <li><span class="text-gray-400">›</span></li>
             <li>
-                <a href="index.php?action=dienthoai" class="text-blue-700 hover:underline font-medium">Tin Tức Công Nghệ</a>
+                <a href="index.php?action=tintuc" class="text-blue-700 hover:underline font-medium">Tin Tức Công Nghệ</a>
             </li>
         </ol>
     </nav>

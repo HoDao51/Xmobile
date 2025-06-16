@@ -126,10 +126,6 @@ include_once "../../Connection/close.php";
             <div class="mb-8 border rounded-lg shadow p-4 bg-white">
                 <div class="flex items-center justify-between mb-2">
                     <h1 class="text-xl font-semibold">Mã đơn hàng: #<?php echo $orderId ?></h1>
-                    <a href="check_out/delete_order.php?id=<?php echo $orderId; ?>" 
-                        class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 font-medium">
-                        Xóa đơn hàng
-                    </a>
                 </div>
                 <p><strong>Ngày đặt:</strong> <?php echo $order['Order_date']; ?></p>
                 
@@ -161,11 +157,11 @@ include_once "../../Connection/close.php";
                 
                 <table class="w-full mt-4 border-t text-left">
                     <thead>
-                        <tr class="bg-gray-100">
-                            <th class="py-2">Ảnh</th>
+                        <tr class="bg-gray-100 ">
+                            <th class="py-2 px-5">Ảnh</th>
                             <th width="400px">Tên sản phẩm</th>
-                            <th width="150px">Số lượng</th>
                             <th width="150px">Giá</th>
+                            <th width="150px">Số lượng</th>
                             <th width="150px">Tổng</th>
                         </tr>
                     </thead>
@@ -179,8 +175,8 @@ include_once "../../Connection/close.php";
                             <tr class="border-t">
                                 <td><img src="../../admins/admincp/images/<?php echo $item['ImageName'] ?>" width="80" class="pt-4 pb-4"></td>
                                 <td><?php echo $item['ProductName'] ?></td>
-                                <td><?php echo $item['Quantity']; ?></td>
                                 <td><?php echo number_format($item['Price'], 0, ',', '.') . ' đ'; ?></td>
+                                <td class="px-7"><?php echo $item['Quantity']; ?></td>
                                 <td><?php echo number_format($subtotal, 0, ',', '.') . ' đ'; ?></td>
                             </tr>
                         <?php } ?>
