@@ -1,5 +1,6 @@
 <?php
     // Lấy dữ liệu trong form
+    $images = $_FILES["image"]["name"];
     $name = $_POST["Name"];
     $phone = $_POST["Phone"];
     $address = $_POST["Address"];
@@ -15,10 +16,15 @@
     foreach ($results as $result) {
         if ($result['count_id'] == 0) {
             // Viết sql để thêm mới
-            $sql = "INSERT INTO customers (Name, Phone, Address, Email, Password) 
-                    VALUES ('$name', '$phone', '$address', '$email', '$password')";
+            $sql = "INSERT INTO customers (Name, Phone, Address, Email, Password, Images) 
+                    VALUES ('$name', '$phone', '$address', '$email', '$password', '$images')";
             // Chạy sql
             mysqli_query($connection, $sql);
+            // Kiểm tra nếu ảnh hợp lệ và chưa có trong thư mục thì lưu
+            if ($_FILES["image"]["error"] == 0 && !file_exists("../images/" . $images)) {
+                $path = $_FILES["image"]["tmp_name"];
+                move_uploaded_file($path, "../images/" . $images);
+            }
             // Quay về danh sách
             header("location: ../index.php?action=quanlytaikhoankhachhang");
         } else {

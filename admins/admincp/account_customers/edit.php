@@ -13,12 +13,16 @@
 ?>
 
 <h2>Sửa tài khoản</h2>
-<form method="post" action="account_customers/update.php">
+<form method="post" action="account_customers/update.php" enctype="multipart/form-data">
     <div class="form-grid">
         <?php foreach ($customers as $customer) { ?>
             <div class="form-group">
                 <label for="id">ID:</label>
                 <input type="text" name="id" id="id" readonly value="<?php echo $customer['Id']; ?>">
+            </div>
+            <div class="form-group">
+                <label for="image">Ảnh đại diện: <img src="images/<?php echo $customer["Images"]?> " style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+                </label><input type="file" name="image" id="image">
             </div>
             <div class="form-group">
                 <label for="Name">Tên Đăng Nhập:</label>

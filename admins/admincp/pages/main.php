@@ -15,6 +15,8 @@
         }//quản lý tài khoản khách hàng
         else if($pages == "quanlytaikhoankhachhang"){
             include_once "content/quanlytaikhoankhachhang.php";
+        }else if($pages == "xemchitiettaikhoankhachhang"){
+            include_once "account_customers/account_customer_detail.php";
         }else if($pages == "themtaikhoankhachhang"){
             include_once "account_customers/create.php";
         }else if($pages == "suataikhoankhachhang"){

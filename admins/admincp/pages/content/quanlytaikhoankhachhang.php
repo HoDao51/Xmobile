@@ -73,10 +73,9 @@ include_once "../../connection/close.php";
         <thead class="bg-gray-100">
             <tr>
                 <th width="50px">Id</th>
+                <th>Ảnh đại diện</th>
                 <th>Tên</th>
-                <th>Email</th>
-                <th>Số điện thoại</th>
-                <th>Địa chỉ</th>
+                <th>Xem chi tiết</th>
                 <th width="100px">Sửa</th>
                 <th width="100px">Xóa</th>
             </tr>
@@ -85,10 +84,11 @@ include_once "../../connection/close.php";
             <?php foreach ($customers as $customer){ ?>
                 <tr>
                     <td><?php echo $customer['Id']; ?></td>
+                    <td><img src="images/<?php echo $customer["Images"] ?>" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;"></td>
                     <td><?php echo $customer['Name']; ?></td>
-                    <td><?php echo $customer['Email']; ?></td>
-                    <td><?php echo $customer['Phone']; ?></td>
-                    <td><?php echo $customer['Address']; ?></td>
+                    <td>
+                        <a href="index.php?action=xemchitiettaikhoankhachhang&id=<?php echo $customer['Id']; ?>">Xem chi tiết</a>
+                    </td>
                     <td>
                         <a href="index.php?action=suataikhoankhachhang&id=<?php echo $customer['Id']; ?>">Sửa</a>
                     </td>

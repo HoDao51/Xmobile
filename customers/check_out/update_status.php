@@ -1,6 +1,6 @@
 <?php
 // Mở kết nối
-include_once "../../../Connection/open.php";
+include_once "../../Connection/open.php";
 
 $order_id = $_POST['order_id'];
 $status = $_POST['status'];
@@ -25,8 +25,8 @@ if ($canUpdate) {
 }
 
 // Đóng kết nối
-include_once "../../../Connection/close.php";
+include_once "../../Connection/close.php";
 
-// Quay lại trang chi tiết đơn hàng
-header("Location: ../index.php?action=chitietdonhang&id=$order_id");
+// Quay lại trang lịch sử mua hàng
+header("Location: ../index.php?action=lichsumuahang&id=$order_id");
 exit;

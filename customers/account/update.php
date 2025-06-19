@@ -9,7 +9,7 @@
     $password = $_POST["Password"];
 
     // Mở kết nối
-    include_once "../../../Connection/open.php";
+    include_once "../../Connection/open.php";
 
     // Kiểm tra email đã tồn tại (ngoại trừ chính người dùng đang sửa)
     $checkEmail = "SELECT *, COUNT(Id) AS count_id FROM customers WHERE Email = '$email' AND Id != '$id'";
@@ -28,22 +28,22 @@
             // Chạy sql
             mysqli_query($connection, $sql);
             // Kiểm tra nếu ảnh hợp lệ và chưa có trong thư mục thì lưu
-            if ($_FILES["image"]["error"] == 0 && !file_exists("../images/" . $images)) {
+            if ($_FILES["image"]["error"] == 0 && !file_exists("../../admins/admincp/images/" . $images)) {
             $path = $_FILES["image"]["tmp_name"];
-            move_uploaded_file($path, "../images/" . $images);
+            move_uploaded_file($path, "../../admins/admincp/images/" . $images);
             }
         }
             // Quay về danh sách
-            header("location: ../index.php?action=quanlytaikhoankhachhang");
+            header("location: ../index.php?action=xemtaikhoan");
         } else {
             // Email đã tồn tại
             echo "<script>
                 alert('Email đã tồn tại! Vui lòng sử dụng email khác!');
-                window.location.href = '../index.php?action=quanlytaikhoankhachhang';
+                window.location.href = '../index.php?action=xemtaikhoan';
             </script>";      
         }
     }
 
     // Đóng kết nối
-    include_once "../../../Connection/close.php";
+    include_once "../../Connection/close.php";
 ?>

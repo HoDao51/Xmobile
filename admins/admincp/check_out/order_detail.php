@@ -68,15 +68,40 @@ include_once "../../Connection/close.php";
             <!-- Form cập nhật trạng thái -->
             <form action="check_out/update_status.php" method="POST">
                 <input type="hidden" name="order_id" value="<?php echo $orderId; ?>">
+
                 <label for="status" class="font-semibold">Cập nhật trạng thái:</label>
-                <select name="status" id="status" class="border px-3 py-1 rounded">
-                    <option value="0" <?php if($order['Order_status'] == 0) echo 'selected'; ?>>Chờ xử lý</option>
-                    <option value="1" <?php if($order['Order_status'] == 1) echo 'selected'; ?>>Đang giao</option>
-                    <option value="2" <?php if($order['Order_status'] == 2) echo 'selected'; ?>>Đã giao</option>
-                    <option value="3" <?php if($order['Order_status'] == 3) echo 'selected'; ?>>Đã hủy</option>
-                </select>
-                <button type="submit" class="ml-2 pl-3 pr-3 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition">Cập nhật</button>
+
+                <?php if ($order['Order_status'] == 0) { ?>
+                    <select name="status" id="status" class="border px-3 py-1 rounded">
+                        <option value="0" selected>Chờ xử lý</option>
+                        <option value="1">Đang giao</option>
+                        <option value="2">Đã giao</option>
+                        <option value="3">Đã hủy</option>
+                    </select>
+                    <button type="submit" 
+                            class="ml-2 pl-3 pr-3 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition">
+                        Cập nhật
+                    </button>
+
+                <?php } elseif ($order['Order_status'] == 1) { ?>
+                    <select name="status" id="status" class="border px-3 py-1 rounded">
+                        <option value="1" selected>Đang giao</option>
+                        <option value="2">Đã giao</option>
+                        <option value="3">Đã hủy</option>
+                    </select>
+                    <button type="submit" 
+                            class="ml-2 pl-3 pr-3 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition">
+                        Cập nhật
+                    </button>
+
+                <?php } elseif ($order['Order_status'] == 2) { ?>
+                    <span style="color: red; font-size: 18px; font-weight: bold;">Đã giao</span>
+
+                <?php } elseif ($order['Order_status'] == 3) { ?>
+                    <span style="color: red; font-size: 18px; font-weight: bold;">Đã hủy</span>
+                <?php } ?>
             </form>
+
         </div>
 
         <table border="1" width="100%" cellpadding="8" cellspacing="0" class="bg-white rounded-lg border text-left">

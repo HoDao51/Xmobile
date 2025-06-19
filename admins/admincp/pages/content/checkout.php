@@ -37,10 +37,20 @@
             FROM orders
             JOIN customers ON orders.Customer_id = customers.Id
             WHERE customers.Name LIKE '%$keyword%'
-            ORDER BY orders.Id DESC
+            ORDER BY 
+           CASE orders.Order_status
+                WHEN 'chờ xử lý' THEN 1
+                WHEN 'đang giao' THEN 2
+                WHEN 'đã giao' THEN 3
+                WHEN 'đã hủy' THEN 4
+                ELSE 5
+            END ASC,
+            orders.Order_date DESC
             LIMIT $start, $recordsPerPage";
+    //chạy query
     $result = mysqli_query($connection, $sql);
 
+    //đóng kết nối
     include_once "../../Connection/close.php";
 ?>
 
