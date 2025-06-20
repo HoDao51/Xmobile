@@ -62,7 +62,7 @@
             </div>
 
             <div class="flex justify-center gap-4 mt-8">
-                <a href="index.php?action=quanlytaikhoankhachhang" 
+                <a href="index.php?action=index.php" 
                    class="px-5 py-2 bg-gray-300 rounded hover:bg-gray-400 transition">
                     Thoát
                 </a>

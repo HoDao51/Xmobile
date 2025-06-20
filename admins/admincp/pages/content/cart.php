@@ -1,4 +1,5 @@
 <?php
+    //mở kết nối
     include_once "../../Connection/open.php";
 
     //Lấy giá trị đang search

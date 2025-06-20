@@ -57,16 +57,20 @@
           <!-- Đăng nhập -->
           <div class="flex items-center h-[45px]">
             <?php 
+              //kiểm tra xem người dùng đã đăng nhập hay chưa
               if(isset($_SESSION['customer_email'])){
-                //lấy ảnh đại diện từ cơ sở dữ liệu
+                //lấy email của khách hàng từ session
                 $customer_email = $_SESSION['customer_email'];
-                $sql = "SELECT * FROM customers WHERE Email = '$customer_email'";
-                $result = mysqli_query($connection, $sql);
-                foreach($result as $images){
+                //truy vấn để lấy thông tin khách hàng từ cơ sở dữ liệu
+                $sqlcustomers = "SELECT * FROM customers WHERE Email = '$customer_email'";
+                //thực hiện truy vấn
+                $customers = mysqli_query($connection, $sqlcustomers);
+                //lấy thông tin khách hàng
+                foreach($customers as $customer){
             ?>
               <div class="relative z-[1001] pl-4">
                 <button id="profileBtn" class="p-0" aria-label="User profile">
-                  <img src="../admins/admincp/images/<?php echo $images["Images"] ?>" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;"/>
+                  <img src="../admins/admincp/images/<?php echo $customer["Images"] ?>" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;"/>
                 </button>
                 <div id="dropdownMenu" class=" absolute right-0 mt-2 hidden min-w-[160px] rounded-lg border border-gray-200 bg-white shadow-lg">
                   <a href="index.php?action=xemtaikhoan" class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 hover:rounded-t-lg">Xem tài khoản</a>

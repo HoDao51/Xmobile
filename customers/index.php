@@ -17,10 +17,11 @@
 <body>
     <div class="page-wrapper">
     <?php
+        //header
         include_once "pages/header.php";
-
+        //main content
         include_once "pages/main.php";
-
+        //footer
         include_once "pages/footer.php";
     ?>
     </div>

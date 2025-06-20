@@ -40,9 +40,6 @@
 
         <label for="email" style="float: left; color:rgb(230, 170, 31);">Email: </label><br>
         <input type="email" name="email" id="email" placeholder="Nhập email của bạn" required><br>
-
-        
-
         <button><b>Đăng nhập</b></button>
     </form>
     <p class="note">Vui lòng nhập thông tin để truy cập hệ thống quản trị.</p>

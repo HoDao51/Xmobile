@@ -1,10 +1,10 @@
 <?php
 //Lấy giá trị đang search
-            if(isset($_GET["keyword"])){
-                $keyword = $_GET["keyword"];
-            } else {
-                $keyword = "";
-            }
+if(isset($_GET["keyword"])){
+    $keyword = $_GET["keyword"];
+} else {
+    $keyword = "";
+}
 
 // Mở kết nối
 include_once "../../connection/open.php";

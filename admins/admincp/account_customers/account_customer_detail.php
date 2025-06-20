@@ -1,21 +1,27 @@
  <link rel="stylesheet" href="css/style_customers.css">
 <?php
+        //lấy id khách hàng
         $id = $_GET['id'];
+        //mở kết nối
         include_once "../../Connection/open.php";
+        //truy vấn dữ liệu khách hàng theo id
         $sql = "SELECT * FROM customers WHERE Id = '$id'";
+        //chạy query
         $result = mysqli_query($connection, $sql);
+        //đóng kết nối
         include_once "../../Connection/close.php";
     ?>
 
     <div class="container">
         <h2 class="title">Chi tiết tài khoản khách hàng</h2>
 
-        <?php foreach ($result as $customer) { ?>
+        <?php 
+            foreach ($result as $customer) { 
+        ?>
             <div class="avatar">
-                <img src="images/<?php echo $customer['Images']; ?>" alt="Avatar">
+                <img src="images/<?php echo $customer['Images']; ?>">
                 <p class="name"><?php echo $customer['Name']; ?></p>
             </div>
-
             <div class="info-grid">
                 <div class="info-item">
                     <label>ID:</label>
@@ -43,5 +49,7 @@
                     <button class="btn edit">Chỉnh sửa</button>
                 </a>
             </div>
-        <?php } ?>
+        <?php 
+            } 
+        ?>
     </div>

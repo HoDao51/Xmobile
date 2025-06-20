@@ -22,7 +22,6 @@
         </button>
     </form>
 
-
     <a href="index.php?action=themsanpham"><button type="button">Thêm sản phẩm</button></a>
 
     <!-- Bảng danh sách sản phẩm -->
@@ -35,7 +34,7 @@
             <th>Xóa</th>
         </tr>
         <?php
-            // Kết nối
+            //mở kết nối
             include_once "../../connection/open.php";
 
             // Số sản phẩm mỗi trang
@@ -73,8 +72,7 @@
 
             // Đóng kết nối
             include_once "../../connection/close.php";
-
-            // Hiển thị
+            // Hiển thị sản phẩm
             foreach ($products as $product) {
         ?>
         <tr>

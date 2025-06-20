@@ -58,10 +58,10 @@ $sqlOrders = "SELECT Id, Order_date, Order_status,
     WHERE Customer_id = $customer_id
     ORDER BY 
             CASE orders.Order_status
-                WHEN 'chờ xử lý' THEN 1
-                WHEN 'đang giao' THEN 2
-                WHEN 'đã giao' THEN 3
-                WHEN 'đã hủy' THEN 4
+                WHEN 0 THEN 1  -- Chờ xử lý
+                WHEN 1 THEN 2  -- Đang giao
+                WHEN 2 THEN 3  -- Đã giao
+                WHEN 3 THEN 4  -- Đã hủy
                 ELSE 5
             END ASC,
             orders.Order_date DESC

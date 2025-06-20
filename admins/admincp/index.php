@@ -22,7 +22,6 @@
       ?>
       <div id="content" class="p-4 p-md-5">
         <?php 
-          //header
           include_once "pages/navbar.php";
           //main content
           include_once "pages/main.php";
@@ -34,5 +33,4 @@
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
-        
   </html>
