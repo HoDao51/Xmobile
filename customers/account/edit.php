@@ -16,9 +16,16 @@
     <form method="post" action="account/update.php" enctype="multipart/form-data" class="space-y-6">
         <?php foreach ($customers as $customer) { ?>
             <div class="flex flex-col items-center gap-3">
+                <?php 
+                    //nếu khách hàng không có ảnh đại diện thì hiển thị ảnh mặc định
+                    if($customer["Images"] == NULL){
+                ?>
+                <img src="images/header/avatar.webp"
+                     class="w-32 h-32 rounded-full object-cover border-4 border-gray-300">
+                <?php } else { ?>
                 <img src="../admins/admincp/images/<?php echo $customer["Images"]; ?>" 
-                     class="w-32 h-32 rounded-full object-cover border-4 border-gray-300" 
-                     alt="Ảnh đại diện">
+                     class="w-32 h-32 rounded-full object-cover border-4 border-gray-300">
+                <?php } ?>
                 <input type="file" name="image" id="image" class="mt-2">
             </div>
 

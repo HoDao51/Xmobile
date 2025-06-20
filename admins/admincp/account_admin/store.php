@@ -22,7 +22,7 @@
             // Email đã tồn tại
             echo "<script>
                 alert('Email đã tồn tại! Vui lòng sử dụng email khác!');
-                window.location.href = '../index.php?action=quanlytaikhoanadmin';
+                window.location.href = '../index.php?action=themtaikhoanadmin';
             </script>";      
         }
     }

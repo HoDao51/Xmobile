@@ -169,7 +169,7 @@
                         <td><?php echo $cart['Product_id']; ?></td>
                         <td><?php echo $cart['ProductName']; ?></td>
                         <td>
-                            <img src="images/<?php echo $cart['ImageName']; ?>" width="120" height="120">
+                            <img src="images/<?php echo $cart['ImageName']; ?>" width="100px" height="120px">
                         </td>
                         <td>
                             <input type="text" name="cart[<?php echo $cart['Cart_id']; ?>][<?php echo $cart['Product_id']; ?>]" value="<?php echo $cart['Quantity']; ?>" size="2">

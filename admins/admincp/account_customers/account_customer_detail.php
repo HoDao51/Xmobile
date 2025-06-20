@@ -19,7 +19,14 @@
             foreach ($result as $customer) { 
         ?>
             <div class="avatar">
-                <img src="images/<?php echo $customer['Images']; ?>">
+                <?php 
+                    //nếu khách hàng không có ảnh đại diện thì hiển thị ảnh mặc định
+                    if($customer["Images"] == NULL){
+                ?>
+                    <img src="../../customers/images/header/avatar.webp">
+                <?php } else { ?>
+                    <img src="images/<?php echo $customer['Images']; ?>">
+                <?php } ?>
                 <p class="name"><?php echo $customer['Name']; ?></p>
             </div>
             <div class="info-grid">

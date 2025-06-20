@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label for="Password">Mật Khẩu:</label>
-                <input type="text" name="Password" id="Password" value="<?php echo $admin['Password']; ?>">
+                <input type="password" name="Password" id="Password" value="<?php echo $admin['Password']; ?>">
             </div>
         <?php } ?>
     </div>

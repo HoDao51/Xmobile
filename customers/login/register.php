@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng kí</title>
+    <title>Đăng ký</title>
     <link rel="shortcut icon" type="image/png" href="../images/header/logo.png">
     <!-- Kết nối với Font Awesome qua CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -32,7 +32,11 @@
     ?>
     <div class="container">
         <h2>Đăng Ký</h2>
-        <form method="post" action="register_process.php">
+        <form method="post" action="register_process.php" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="image">Ảnh đại diện: </label>
+                <input type="file" name="image" id="image"><br>
+        </div>
             <div class="input-group">
                 <label for="name">TÊN</label>
                 <i class="fas fa-user"></i>

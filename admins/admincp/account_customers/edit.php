@@ -21,7 +21,15 @@
                 <input type="text" name="id" id="id" readonly value="<?php echo $customer['Id']; ?>">
             </div>
             <div class="form-group">
-                <label for="image">Ảnh đại diện: <img src="images/<?php echo $customer["Images"]?> " style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+                <label for="image">Ảnh đại diện: 
+                    <?php 
+                        //nếu khách hàng không có ảnh đại diện thì hiển thị ảnh mặc định
+                        if($customer["Images"] == NULL){
+                    ?>
+                        <img src="../../customers/images/header/avatar.webp" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+                    <?php } else { ?>
+                        <img src="images/<?php echo $customer["Images"]?> " style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+                    <?php } ?>
                 </label><input type="file" name="image" id="image">
             </div>
             <div class="form-group">

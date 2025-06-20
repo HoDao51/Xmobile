@@ -61,7 +61,7 @@
             </li>
         </ol>
     </nav>
-  <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" data-aos="zoom-in">
+  <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6" data-aos="zoom-in">
     <?php foreach ($product_image as $product) { ?>
       <div class="bg-white rounded-2xl shadow-md overflow-hidden transition-transform hover:scale-[1.03] duration-300">
         <a href="index.php?action=chitietsanpham&id=<?php echo $product['Id']; ?>" class="block">

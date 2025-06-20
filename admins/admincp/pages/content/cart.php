@@ -3,11 +3,11 @@
     include_once "../../Connection/open.php";
 
     //Lấy giá trị đang search
-                if(isset($_GET["keyword"])){
-                    $keyword = $_GET["keyword"];
-                } else {
-                    $keyword = "";
-                }
+    if(isset($_GET["keyword"])){
+        $keyword = $_GET["keyword"];
+    } else {
+        $keyword = "";
+    }
 
     // Số bản ghi mỗi trang
     $recordsPerPage = 5;
@@ -22,11 +22,11 @@
     $pages = ceil($totalRecords / $recordsPerPage);
 
     // Lấy trang hiện tại
-        if(isset($_GET["page"])){
-                    $page = $_GET["page"];
-                } else {
-                    $page = 1;
-                }
+    if(isset($_GET["page"])){
+        $page = $_GET["page"];
+    } else {
+        $page = 1;
+    }
     // Đảm bảo $page >= 1
     if ($page < 1) {
         $page = 1;
@@ -38,7 +38,6 @@
     if ($page > $pages) {
         $page = $pages;
     }
-
 
     // Vị trí bắt đầu của từng trang
     $start = ($page - 1) * $recordsPerPage;
@@ -53,8 +52,9 @@
             WHERE customers.Name LIKE '%$keyword%'
             ORDER BY customers.Name ASC
             LIMIT $start, $recordsPerPage";
+    // Chạy truy vấn
     $customers = mysqli_query($connection, $sql);
-
+    //đóng kết nối
     include_once "../../Connection/close.php";
 ?>
 

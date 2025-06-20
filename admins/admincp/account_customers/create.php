@@ -16,7 +16,7 @@
         <div class="form-group">
                 <label for="image">Ảnh đại diện: </label>
                 <input type="file" name="image" id="image"><br>
-            </div>
+        </div>
         <div class="form-group">
             <label for="Name">Tên Đăng Nhập:</label>
             <input type="text" name="Name" id="Name">

@@ -69,9 +69,19 @@
                 foreach($customers as $customer){
             ?>
               <div class="relative z-[1001] pl-4">
+                <?php 
+                //nếu khách hàng không có ảnh đại diện thì hiển thị ảnh mặc định
+                if($customer["Images"] == NULL){
+                ?>
+                  <button id="profileBtn" class="p-0" aria-label="User profile">
+                    <img src="images/header/avatar.webp" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;"/>
+                  </button>
+                <?php } else { ?>
                 <button id="profileBtn" class="p-0" aria-label="User profile">
                   <img src="../admins/admincp/images/<?php echo $customer["Images"] ?>" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;"/>
                 </button>
+                <?php } ?>
+                
                 <div id="dropdownMenu" class=" absolute right-0 mt-2 hidden min-w-[160px] rounded-lg border border-gray-200 bg-white shadow-lg">
                   <a href="index.php?action=xemtaikhoan" class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 hover:rounded-t-lg">Xem tài khoản</a>
                   <a href="login/logout.php" class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 hover:rounded-b-lg">Đăng xuất</a>

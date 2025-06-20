@@ -16,9 +16,16 @@ include_once "../connection/close.php";
     <?php foreach ($customer as $customer) { ?>
         <!-- Ảnh đại diện -->
         <div class="flex flex-col items-center mb-6">
-            <img src="../admins/admincp/images/<?php echo $customer['Images']; ?>" 
-                alt="Ảnh đại diện"
-                class="w-32 h-32 rounded-full object-cover border-4 border-gray-300 shadow-md mb-3">
+            <?php 
+                //nếu khách hàng không có ảnh đại diện thì hiển thị ảnh mặc định
+                if($customer["Images"] == NULL){
+            ?>
+                <img src="images/header/avatar.webp"
+                    class="w-32 h-32 rounded-full object-cover border-4 border-gray-300 shadow-md mb-3">
+            <?php } else { ?>
+                <img src="../admins/admincp/images/<?php echo $customer['Images']; ?>" 
+                    class="w-32 h-32 rounded-full object-cover border-4 border-gray-300 shadow-md mb-3">
+            <?php } ?>
             <h2 class="text-xl font-semibold text-gray-800">Thông tin tài khoản của bạn</h2>
         </div>
 

@@ -84,7 +84,16 @@ include_once "../../connection/close.php";
             <?php foreach ($customers as $customer){ ?>
                 <tr>
                     <td><?php echo $customer['Id']; ?></td>
-                    <td><img src="images/<?php echo $customer["Images"] ?>" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;"></td>
+                    <td>
+                        <?php 
+                            //nếu khách hàng không có ảnh đại diện thì hiển thị ảnh mặc định
+                            if($customer["Images"] == NULL){
+                        ?>
+                            <img src="../../customers/images/header/avatar.webp" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        <?php } else { ?>
+                            <img src="images/<?php echo $customer["Images"] ?>" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        <?php }?>
+                    </td>
                     <td><?php echo $customer['Name']; ?></td>
                     <td>
                         <a href="index.php?action=xemchitiettaikhoankhachhang&id=<?php echo $customer['Id']; ?>">Xem chi tiết</a>
