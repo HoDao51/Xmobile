@@ -26,9 +26,8 @@
             // Lưu thông tin lên session
             $_SESSION['customer_id'] = $result['Id'];
             $_SESSION['customer_email'] = $result['Email'];
-            // Quay về trang quản trị
-            header("Location: " . $_SERVER['HTTP_REFERER']);
-            exit;
+            //Quay về danh sách
+            header("Location: ../index.php");
         }
     }
 ?>

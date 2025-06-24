@@ -35,7 +35,6 @@
             </script>";      
         }
     }
-
     // Đóng kết nối
     include_once "../../Connection/close.php";
 ?>

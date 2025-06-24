@@ -26,4 +26,3 @@ include_once "../../../Connection/close.php";
 
 // Quay lại trang chi tiết đơn hàng
 header("Location: ../index.php?action=chitietdonhang&id=$order_id");
-exit;
