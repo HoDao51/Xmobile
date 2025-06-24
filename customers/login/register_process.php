@@ -26,7 +26,7 @@
                 move_uploaded_file($path, "../images/" . $images);
             }
             // Quay về danh sách
-            header("location: login.php");
+            header("location: register.php?success=1");
         } else {
             // Email đã tồn tại
             echo "<script>

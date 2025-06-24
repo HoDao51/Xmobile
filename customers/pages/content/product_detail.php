@@ -129,9 +129,10 @@
     ?>
             <!-- Thêm vào giỏ hàng -->
             <div>
-                <a href="cart/add_to_cart.php?id=<?php echo $product['Id']; ?>" class="block">
-                    <button class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded font-semibold mb-5">Thêm vào giỏ hàng</button>
-                </a>
+                <button onclick="addToCart(<?php echo $product['Id']; ?>)" 
+                        class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded font-semibold mb-5">
+                    Thêm vào giỏ hàng
+                </button>
             </div>
             <img src="images/products/ads/iphonexs.jpg" class="pb-4">
             <!-- sản phẩm liên quan -->
@@ -161,4 +162,27 @@
             </div>
         </div>
     </div>
+    <script>
+    function addToCart(productId) {
+        // Gửi yêu cầu thêm sản phẩm vào giỏ hàng (AJAX hoặc điều hướng)
+        fetch(`cart/add_to_cart.php?id=${productId}`)
+            .then(response => {
+                if (response.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Đã thêm vào giỏ hàng!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Có lỗi xảy ra!',
+                        text: 'Vui lòng thử lại.'
+                    });
+                }
+            });
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

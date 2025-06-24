@@ -25,4 +25,4 @@ include_once "../../Connection/close.php";
 
 // Quay lại trang lịch sử mua hàng
 header("Location: ../index.php?action=lichsumuahang&id=$order_id");
-exit;
+?>

@@ -68,8 +68,5 @@ foreach ($checkCarts as $checkCart) {
     }
 }
 // quay về trang trước đó 
-echo "<script>
-    alert('Đã thêm vào giỏ hàng!');
-    window.location.href = document.referrer;
-</script>";
+header("Location: ../index.php?action=chitietsanpham&id=$productId");
 ?>
