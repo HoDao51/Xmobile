@@ -2,8 +2,11 @@
 //mở kết nối
 include_once "../Connection/open.php";
 $total = 0;
+// Kiểm tra xem người dùng đã đăng nhập chưa
+if(isset($_SESSION['customer_email'])){
 //Lấy id của tài khoản đang đăng nhập
 $customer_id = $_SESSION['customer_id'];
+
 
 // Lấy thông tin khách hàng
 $sqlCustomer = "SELECT Name FROM customers WHERE Id = $customer_id";
@@ -48,6 +51,9 @@ $sqlCart = "SELECT
     LIMIT $start, $recordsPerPage";
 //chạy query
 $carts = mysqli_query($connection, $sqlCart);
+} else {
+    
+}
 //đóng kết nối
 include_once "../Connection/close.php";
 ?>
@@ -66,6 +72,9 @@ include_once "../Connection/close.php";
                 </li>
             </ol>
         </nav>
+    <?php 
+        if(isset($_SESSION['customer_email'])){
+    ?>
     <div class="max-w-6xl mx-auto p-6">
         <div class="flex items-center justify-between pb-3" data-aos="zoom-in">
             <h1 class="text-4xl font-bold mb-6">Giỏ hàng</h1>
@@ -156,5 +165,11 @@ include_once "../Connection/close.php";
                 </a>
             <?php } ?>
         </div>
+        <?php } else { ?>
+            <div class="text-center mt-10">
+                <h2 class="text-2xl font-bold mb-4">Bạn chưa đăng nhập</h2>
+                <p class="mb-4">Vui lòng đăng nhập để xem giỏ hàng của bạn.</p>
+            </div>
+        <?php } ?>
     </div>
 </div>

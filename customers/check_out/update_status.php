@@ -11,14 +11,14 @@ $sqlGetStatus = "SELECT Order_status FROM orders WHERE Id = $order_id";
 $getStatuses = mysqli_query($connection, $sqlGetStatus);
 //Lấy status hiện tại
 foreach ($getStatuses as $getStatus ) {
-        $currentStatus = $getStatus['order_status'];
+        $currentStatus = $getStatus['Order_status'];
     }
 //chỉ cập nhật trạng thái nếu đơn hàng đang ở trạng thái chờ xử lý
-if ($currentStatus == 1 || $currentStatus == 2 || $currentStatus == 3) {
-    // không cập nhập
-}else{
+if ($currentStatus == 0 ) {
     $sqlUpdate = "UPDATE orders SET Order_status = $status WHERE Id = $order_id";
     mysqli_query($connection, $sqlUpdate);
+}else{
+    
 }
 // Đóng kết nối
 include_once "../../Connection/close.php";

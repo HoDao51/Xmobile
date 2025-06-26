@@ -10,6 +10,8 @@ $sqlOrderInfo = "SELECT
                     orders.Order_date,
                     orders.Order_status,
                     orders.Delivery_location,
+                    orders.Receiver_name,
+                    orders.Receiver_phone,
                     orders.Payment_method,
                     customers.Name AS CustomerName
                 FROM orders
@@ -49,7 +51,7 @@ include_once "../../Connection/close.php";
         </div>
     <?php } else { ?>
         <div class=" p-6 mb-3">
-            <p style="font-size: 20px"><strong>Khách hàng:</strong> <strong style="color: red; "><?php echo $order['CustomerName']; ?></strong></p>
+            <p style="font-size: 20px"><strong>Khách hàng:</strong> <strong style="color: red; "><?php echo $order['Receiver_name']; ?></strong></p>
             <p><strong>Ngày đặt:</strong> <?php echo $order['Order_date']; ?></p>
             <p><strong>Trạng thái:</strong>
                 <?php
@@ -63,6 +65,7 @@ include_once "../../Connection/close.php";
                 ?>
             </p>
             <p><strong>Địa chỉ giao hàng:</strong> <?php echo $order['Delivery_location']; ?></p>
+            <p><strong>Số điện thoại:</strong> <?php echo $order['Receiver_phone']; ?></p>
             <p><strong>Phương thức thanh toán:</strong> <?php echo $order['Payment_method']; ?></p>
 
             <!-- Form cập nhật trạng thái -->

@@ -2,6 +2,8 @@
 session_start();
 //lấy id của người dùng đang đăng nhập
 $customer_id = $_SESSION['customer_id'];
+$receiver_name = $_POST['receiver_name'];
+$phone = $_POST['phone'];
 $address = $_POST['address'];
 $payment_method = $_POST['payment_method'];
 // Kết nối DB
@@ -26,14 +28,14 @@ $order_date = date("Y-m-d");
 $order_status = 0;
 
 // Thêm đơn hàng vào bảng orders
-$sql_insert_order = "INSERT INTO orders (Customer_id, Order_date, Order_status, Delivery_location, Payment_method ) 
-    VALUES ('$customer_id', '$order_date', '$order_status', '$address', '$payment_method')";
+$sql_insert_order = "INSERT INTO orders (Customer_id, Order_date, Order_status, Delivery_location, Receiver_name, Receiver_phone, Payment_method ) 
+    VALUES ('$customer_id', '$order_date', '$order_status', '$address', '$receiver_name', '$phone', '$payment_method')";
 
 mysqli_query($connection, $sql_insert_order);
 
 //lấy id của order vừa được tạo
 //viết sql 
-$sql_get_order_id = "SELECT Id FROM orders WHERE Customer_id = '$customer_id' AND Order_date = '$order_date' AND Order_status = '$order_status' AND Delivery_location = '$address' AND Payment_method = '$payment_method'";
+$sql_get_order_id = "SELECT Id FROM orders WHERE Customer_id = '$customer_id' AND Order_date = '$order_date' AND Order_status = '$order_status' AND Delivery_location = '$address' AND Receiver_name = '$receiver_name' AND Receiver_phone = '$phone' AND Payment_method = '$payment_method'";
 //chạy sql
 $get_order_ids = mysqli_query($connection, $sql_get_order_id);
 //lấy order_id

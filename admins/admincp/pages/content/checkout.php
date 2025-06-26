@@ -46,11 +46,12 @@
                 WHEN 3 THEN 4  -- Đã hủy
                 ELSE 5
             END ASC,
-            orders.Order_date DESC
+            orders.Order_date DESC,
+            orders.Id DESC
             LIMIT $start, $recordsPerPage";
     //chạy query
     $result = mysqli_query($connection, $sql);
-
+    
     //đóng kết nối
     include_once "../../Connection/close.php";
 ?>
@@ -77,7 +78,7 @@
         <thead>
             <tr>
                 <th width="50px">Id</th>
-                <th>Khách hàng</th>
+                <th>Tài khoản</th>
                 <th>Ngày đặt</th>
                 <th>Trạng thái</th>
                 <th>Xem chi tiết</th>

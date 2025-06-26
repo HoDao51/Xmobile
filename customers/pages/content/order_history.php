@@ -24,51 +24,23 @@ $totalRecords = $row['total'];
 $pages = ceil($totalRecords / $recordsPerPage);
 
 // Lấy trang hiện tại
-    if (isset($_GET["page"])) {
-        $page = $_GET["page"];
-    } else {
-        $page = 1;
-    }
+if (isset($_GET["page"])) {
+    $page = $_GET["page"];
+} else {
+    $page = 1;
+}
 $start = ($page - 1) * $recordsPerPage;
 
-// Lấy đơn hàng kèm chi tiết và sản phẩm, ảnh, phân trang theo đơn hàng
-$sql = "SELECT 
-            orders.Id AS OrderId,
-            orders.Order_date,
-            orders.Order_status,
-            orders.Delivery_location,
-            orders.Payment_method,
-            order_details.Product_id,
-            order_details.Quantity,
-            order_details.Price,
-            products.Name AS ProductName,
-            images.Name AS ImageName
-        FROM orders
-        JOIN order_details ON orders.Id = order_details.Order_id
-        JOIN products ON order_details.Product_id = products.Id
-        LEFT JOIN images ON products.Id = images.Product_id
-        WHERE orders.Customer_id = $customer_id
-        ORDER BY orders.Order_date DESC, orders.Id DESC
-        LIMIT $start, $recordsPerPage
-";
-//Lấy danh sách OrderId phân trang
+// Lấy danh sách OrderId phân trang
 $sqlOrders = "SELECT Id, Order_date, Order_status,
-            Delivery_location, Payment_method
+            Delivery_location,  Receiver_name, Receiver_phone, Payment_method
     FROM orders
     WHERE Customer_id = $customer_id
-    ORDER BY 
-            CASE orders.Order_status
-                WHEN 0 THEN 1  -- Chờ xử lý
-                WHEN 1 THEN 2  -- Đang giao
-                WHEN 2 THEN 3  -- Đã giao
-                WHEN 3 THEN 4  -- Đã hủy
-                ELSE 5
-            END ASC,
-            orders.Order_date DESC
+    ORDER BY orders.Order_date DESC, orders.Id DESC
     LIMIT $start, $recordsPerPage";
 $resultOrders = mysqli_query($connection, $sqlOrders);
 
-//Lấy chi tiết các đơn hàng
+// Lấy chi tiết các đơn hàng
 $orderIds = [];
 $orders = [];
 while ($row = mysqli_fetch_assoc($resultOrders)) {
@@ -77,6 +49,8 @@ while ($row = mysqli_fetch_assoc($resultOrders)) {
         'Order_date' => $row['Order_date'],
         'Order_status' => $row['Order_status'],
         'Delivery_location' => $row['Delivery_location'],
+        'Receiver_name' => $row['Receiver_name'],
+        'Receiver_phone' => $row['Receiver_phone'],
         'Payment_method' => $row['Payment_method'],
         'Items' => []
     ];
@@ -126,7 +100,7 @@ include_once "../Connection/close.php";
 </div>
 <div class="max-w-6xl mx-auto pt-6" data-aos="fade-up">
     <h1 class="text-3xl font-bold mb-6">Lịch sử mua hàng</h1>
-    
+
     <?php if (empty($orders)) { ?>
         <p>Bạn chưa có đơn hàng nào.</p>
     <?php } else { ?>
@@ -135,34 +109,35 @@ include_once "../Connection/close.php";
                 <div class="flex items-center justify-between mb-2">
                     <h1 class="text-xl font-semibold">Mã đơn hàng: #<?php echo $orderId ?></h1>
                 </div>
+                <p><strong>Tên khách hàng:</strong><strong style="color: red; font-size: 20px"> <?php echo $order['Receiver_name']; ?></strong></p>
                 <p><strong>Ngày đặt:</strong> <?php echo $order['Order_date']; ?></p>
-                
-                    <p><strong>Trạng thái:</strong> 
-                        <?php
-                        switch ($order['Order_status']) {
-                            case 0: echo "Chờ xử lý"; break;
-                            case 1: echo "Đang giao"; break;
-                            case 2: echo "Đã giao"; break;
-                            case 3: echo "Đã hủy"; break;
-                            default: echo "Không xác định";
-                        }
-                        ?>
-                    </p>
-                    <p><strong>Địa chỉ giao hàng:</strong> <?php echo $order['Delivery_location']; ?></p>
-                    <p><strong>Phương thức thanh toán:</strong> <?php echo $order['Payment_method']; ?></p>
-                    <p class="mt-[10px]">
-                        <form action="check_out/update_status.php" method="POST">
-                            <input type="hidden"name="order_id" value="<?= $orderId ?>">
-                            <?php if ($order['Order_status'] == 0){ ?>
-                                <button type="submit"
-                                    name="status" value="3"
-                                    class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 font-medium">
-                                    Hủy hàng
-                                </button>
-                            <?php } ?>
-                        </form>
-                    </p>
-                
+
+                <p><strong>Trạng thái:</strong>
+                    <?php
+                    switch ($order['Order_status']) {
+                        case 0: echo "Chờ xử lý"; break;
+                        case 1: echo "Đang giao"; break;
+                        case 2: echo "Đã giao"; break;
+                        case 3: echo "Đã hủy"; break;
+                        default: echo "Không xác định";
+                    }
+                    ?>
+                </p>
+                <p><strong>Địa chỉ giao hàng:</strong> <?php echo $order['Delivery_location']; ?></p>
+                <p><strong>Phương thức thanh toán:</strong> <?php echo $order['Payment_method']; ?></p>
+                <p class="mt-[10px]">
+                    <form action="check_out/update_status.php" method="POST">
+                        <input type="hidden" name="order_id" value="<?= $orderId ?>">
+                        <?php if ($order['Order_status'] == 0) { ?>
+                            <button type="submit"
+                                name="status" value="3"
+                                class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 font-medium">
+                                Hủy hàng
+                            </button>
+                        <?php } ?>
+                    </form>
+                </p>
+
                 <table class="w-full mt-4 border-t text-left">
                     <thead>
                         <tr class="bg-gray-100 ">
@@ -174,7 +149,7 @@ include_once "../Connection/close.php";
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
+                        <?php
                         $orderTotal = 0;
                         foreach ($order['Items'] as $item) {
                             $subtotal = $item['Price'] * $item['Quantity'];
@@ -189,7 +164,7 @@ include_once "../Connection/close.php";
                             </tr>
                         <?php } ?>
                         <tr class="border-t ">
-                            <td colspan="4" class="text-right font-bold pt-4" >Tổng cộng: &nbsp;</td>
+                            <td colspan="4" class="text-right font-bold pt-4">Tổng cộng: &nbsp;</td>
                             <td class="font-bold text-red-600 pt-4">
                                 <strong style="color:rgb(196, 44, 14); font-weight: bold; font-size: 18px">
                                     <?php echo number_format($orderTotal, 0, ',', '.'); ?> đ

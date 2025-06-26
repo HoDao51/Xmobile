@@ -129,10 +129,22 @@
     ?>
             <!-- Thêm vào giỏ hàng -->
             <div>
+                <?php
+                    if(isset($_SESSION['customer_email'])){
+                ?>
                 <button onclick="addToCart(<?php echo $product['Id']; ?>)" 
                         class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded font-semibold mb-5">
                     Thêm vào giỏ hàng
                 </button>
+                <?php
+                    } else {
+                ?>
+                <a href="login/login.php" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded font-semibold mb-5 text-center block">
+                    Thêm vào giỏ hàng
+                </a>
+                <?php
+                    }
+                ?>
             </div>
             <img src="images/products/ads/iphonexs.jpg" class="pb-4">
             <!-- sản phẩm liên quan -->
